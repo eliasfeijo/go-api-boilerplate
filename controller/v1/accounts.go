@@ -30,10 +30,11 @@ func NewAccounts() Accounts {
 // @Tags        accounts
 // @Accept      json
 // @Produce     json
-// @Success     200 {object} response.Account
-// @Failure     400 {object} response.Error
-// @Failure     404 {object} response.Error
-// @Failure     500 {object} response.Error
+// @Param       Account body     payload.Account true "Account body"
+// @Success     200     {object} response.Account
+// @Failure     400     {object} response.Error
+// @Failure     404     {object} response.Error
+// @Failure     500     {object} response.Error
 // @Router      /accounts/login [post]
 func (a accounts) Login() gin.HandlerFunc {
 	return func(c *gin.Context) {
