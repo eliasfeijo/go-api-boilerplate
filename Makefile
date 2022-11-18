@@ -1,4 +1,7 @@
-build:
+generate-swagger:
+	swag i -g server/web.go
+
+build:generate-swagger
 	go build -o api
 
 up:
