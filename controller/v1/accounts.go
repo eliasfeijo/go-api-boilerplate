@@ -24,6 +24,17 @@ func NewAccounts() Accounts {
 	}
 }
 
+// Login godoc
+// @Summary     Authenticates an account
+// @Description returns a JWT and account information
+// @Tags        accounts
+// @Accept      json
+// @Produce     json
+// @Success     200 {object} response.Account
+// @Failure     400 {object} httputil.HTTPError
+// @Failure     404 {object} httputil.HTTPError
+// @Failure     500 {object} httputil.HTTPError
+// @Router      /accounts/login [post]
 func (a accounts) Login() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
@@ -54,6 +65,17 @@ func (a accounts) Login() gin.HandlerFunc {
 	}
 }
 
+// Create godoc
+// @Summary     Creates an account
+// @Description returns a JWT and account information
+// @Tags        accounts
+// @Accept      json
+// @Produce     json
+// @Success     200 {object} response.Account
+// @Failure     400 {object} httputil.HTTPError
+// @Failure     404 {object} httputil.HTTPError
+// @Failure     500 {object} httputil.HTTPError
+// @Router      /accounts [post]
 func (a accounts) CreateAccount() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
@@ -80,6 +102,18 @@ func (a accounts) CreateAccount() gin.HandlerFunc {
 	}
 }
 
+// Update godoc
+// @Summary     Updates an account and user
+// @Description returns the updated account information
+// @Tags        accounts
+// @Accept      json
+// @Produce     json
+// @Success     200 {object} response.Account
+// @Failure     400 {object} httputil.HTTPError
+// @Failure     404 {object} httputil.HTTPError
+// @Failure     500 {object} httputil.HTTPError
+// @Router      /accounts/{id} [put]
+// @Security    AuthorizationBearer
 func (a accounts) UpdateAccount() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
@@ -102,6 +136,16 @@ func (a accounts) UpdateAccount() gin.HandlerFunc {
 	}
 }
 
+// Delete godoc
+// @Summary     Deletes an account and user
+// @Description returns the updated account information
+// @Tags        accounts
+// @Accept      json
+// @Produce     json
+// @Success     204 {object} nil
+// @Failure     404 {object} httputil.HTTPError
+// @Failure     500 {object} httputil.HTTPError
+// @Security    AuthorizationBearer
 func (a accounts) DeleteAccount() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		id := c.Param("id")
@@ -110,6 +154,6 @@ func (a accounts) DeleteAccount() gin.HandlerFunc {
 			c.JSON(404, gin.H{"error": err.Error()})
 			return
 		}
-		c.JSON(200, gin.H{"deleted": deleted})
+		c.JSON(204, gin.H{"deleted": deleted})
 	}
 }
