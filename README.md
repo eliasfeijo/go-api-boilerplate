@@ -6,6 +6,7 @@ Golang reusable API boilerplate with:
 
 - [x] [Gin](https://github.com/gin-gonic/gin)
 - [x] [GORM](https://gorm.io)
+- [x] Swagger docs
 - [x] Manual migrations
 - [x] Seeders
 - [x] JWT Authentication
@@ -16,7 +17,6 @@ Golang reusable API boilerplate with:
 ## Roadmap
 
 - [ ] Add tests
-- [ ] Swagger docs
 - [ ] Telemetry
 
 ## Dependencies
@@ -30,6 +30,8 @@ Golang reusable API boilerplate with:
 Copy the file `.env.example` to `.env` and fill in the values.
 
 See `config/config.go` for more details.
+
+Run: `go install github.com/swaggo/swag/cmd/swag@v1.8.7` to install the swagger documentation generator.
 
 ## Running
 

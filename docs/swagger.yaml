@@ -1,4 +1,207 @@
+basePath: /v1
+definitions:
+  gitlab.com_go-api-boilerplate_payload_v1.Account:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      user:
+        $ref: '#/definitions/gitlab.com_go-api-boilerplate_payload_v1.User'
+    type: object
+  gitlab.com_go-api-boilerplate_payload_v1.User:
+    properties:
+      name:
+        type: string
+    type: object
+  gitlab.com_go-api-boilerplate_response_v1.Account:
+    properties:
+      email:
+        type: string
+      id:
+        type: string
+      user:
+        $ref: '#/definitions/gitlab.com_go-api-boilerplate_response_v1.User'
+    type: object
+  gitlab.com_go-api-boilerplate_response_v1.User:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  v1.AccountWithJWT:
+    properties:
+      account:
+        $ref: '#/definitions/gitlab.com_go-api-boilerplate_response_v1.Account'
+      jwt:
+        type: string
+    type: object
+  v1.Error:
+    properties:
+      error: {}
+    type: object
+  v1.LoginWithEmailAndPassword:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+host: localhost:8080
 info:
-  contact: {}
-paths: {}
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: A basic API containing endpoints for account creation and authentication
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: API
+  version: "1.0"
+paths:
+  /accounts:
+    post:
+      consumes:
+      - application/json
+      description: returns a JWT and account information
+      parameters:
+      - description: Account body
+        in: body
+        name: Account
+        required: true
+        schema:
+          $ref: '#/definitions/gitlab.com_go-api-boilerplate_payload_v1.Account'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.AccountWithJWT'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/v1.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.Error'
+      summary: Creates an account
+      tags:
+      - accounts
+  /accounts/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: returns 204 on success
+      parameters:
+      - description: Account ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/v1.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.Error'
+      security:
+      - Authorization Bearer Token: []
+      summary: Deletes an account and user
+      tags:
+      - accounts
+    put:
+      consumes:
+      - application/json
+      description: returns the updated account information
+      parameters:
+      - description: Account ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Account body
+        in: body
+        name: Account
+        required: true
+        schema:
+          $ref: '#/definitions/gitlab.com_go-api-boilerplate_payload_v1.Account'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/gitlab.com_go-api-boilerplate_response_v1.Account'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/v1.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.Error'
+      security:
+      - Authorization Bearer Token: []
+      summary: Updates an account and user
+      tags:
+      - accounts
+  /accounts/login:
+    post:
+      consumes:
+      - application/json
+      description: returns a JWT and account information
+      parameters:
+      - description: Login body
+        in: body
+        name: Account
+        required: true
+        schema:
+          $ref: '#/definitions/v1.LoginWithEmailAndPassword'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/v1.AccountWithJWT'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/v1.Error'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/v1.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/v1.Error'
+      summary: Authenticates an account
+      tags:
+      - accounts
+securityDefinitions:
+  Authorization Bearer Token:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"
