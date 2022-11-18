@@ -30,7 +30,7 @@ func NewAccounts() Accounts {
 // @Tags        accounts
 // @Accept      json
 // @Produce     json
-// @Param       Account body     payload.Account true "Account body"
+// @Param       Account body     payload.LoginWithEmailAndPassword true "Login body"
 // @Success     200     {object} response.Account
 // @Failure     400     {object} response.Error
 // @Failure     404     {object} response.Error
@@ -39,14 +39,14 @@ func NewAccounts() Accounts {
 func (a accounts) Login() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
-		var p payload.Account
+		var p payload.LoginWithEmailAndPassword
 		err := c.BindJSON(&p)
 		if err != nil {
 			c.JSON(400, gin.H{"error": err.Error()})
 			return
 		}
 
-		account := payload.AccountToDTO(&p)
+		account := payload.LoginWithEmailAndPasswordToAccountDTO(&p)
 
 		jwt, err := a.as.Login(c, account)
 		if err != nil {
