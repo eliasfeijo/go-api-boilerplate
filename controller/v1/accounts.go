@@ -31,7 +31,7 @@ func NewAccounts() Accounts {
 // @Accept      json
 // @Produce     json
 // @Param       Account body     payload.LoginWithEmailAndPassword true "Login body"
-// @Success     200     {object} response.Account
+// @Success     200     {object} response.AccountWithJWT
 // @Failure     400     {object} response.Error
 // @Failure     404     {object} response.Error
 // @Failure     500     {object} response.Error
@@ -58,11 +58,10 @@ func (a accounts) Login() gin.HandlerFunc {
 			return
 		}
 
-		r := gin.H{
-			"jwt":     jwt,
-			"account": response.NewAccountFromDTO(account),
-		}
-		c.JSON(200, r)
+		c.JSON(200, response.AccountWithJWT{
+			JWT:     jwt,
+			Account: response.NewAccountFromDTO(account),
+		})
 	}
 }
 
@@ -73,7 +72,7 @@ func (a accounts) Login() gin.HandlerFunc {
 // @Accept      json
 // @Produce     json
 // @Param       Account body     payload.Account true "Account body"
-// @Success     200     {object} response.Account
+// @Success     200     {object} response.AccountWithJWT
 // @Failure     400     {object} response.Error
 // @Failure     404     {object} response.Error
 // @Failure     500     {object} response.Error
@@ -96,11 +95,10 @@ func (a accounts) CreateAccount() gin.HandlerFunc {
 			return
 		}
 
-		r := gin.H{
-			"jwt":     jwt,
-			"account": response.NewAccountFromDTO(account),
-		}
-		c.JSON(200, r)
+		c.JSON(200, response.AccountWithJWT{
+			JWT:     jwt,
+			Account: response.NewAccountFromDTO(account),
+		})
 	}
 }
 

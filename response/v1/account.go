@@ -8,6 +8,11 @@ type Account struct {
 	User  *User  `json:"user,omitempty"`
 }
 
+type AccountWithJWT struct {
+	Account *Account `json:"account,omitempty"`
+	JWT     string   `json:"jwt,omitempty"`
+}
+
 func NewAccountFromDTO(account *dto.Account) *Account {
 	var user *User
 	if account.User != nil {
