@@ -116,7 +116,7 @@ func (a accounts) CreateAccount() gin.HandlerFunc {
 // @Failure     404     {object} response.Error
 // @Failure     500     {object} response.Error
 // @Router      /accounts/{id} [put]
-// @Security    AuthorizationBearer
+// @Security    Authorization Bearer Token
 func (a accounts) UpdateAccount() gin.HandlerFunc {
 	return func(c *gin.Context) {
 
@@ -150,7 +150,7 @@ func (a accounts) UpdateAccount() gin.HandlerFunc {
 // @Failure     404 {object} response.Error
 // @Failure     500 {object} response.Error
 // @Router      /accounts/{id} [delete]
-// @Security    AuthorizationBearer
+// @Security    Authorization Bearer Token
 func (a accounts) DeleteAccount() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		id := c.Param("id")

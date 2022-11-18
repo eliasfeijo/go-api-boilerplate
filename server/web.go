@@ -5,6 +5,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	ginlogrus "github.com/toorop/gin-logrus"
 	"gitlab.com/go-api-boilerplate/config"
+	_ "gitlab.com/go-api-boilerplate/docs"
 	"gitlab.com/go-api-boilerplate/middleware"
 	"gitlab.com/go-api-boilerplate/routes"
 )
@@ -24,7 +25,9 @@ import (
 // @host     localhost:8080
 // @BasePath /v1
 
-// @securityDefinitions.apikey AuthorizationBearer
+// @securityDefinitions.apikey Authorization Bearer Token
+// @in                         header
+// @name                       Authorization
 func Run() (err error) {
 	cfg := config.GetConfig()
 
