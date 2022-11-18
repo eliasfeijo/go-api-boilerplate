@@ -31,9 +31,9 @@ func NewAccounts() Accounts {
 // @Accept      json
 // @Produce     json
 // @Success     200 {object} response.Account
-// @Failure     400 {object} httputil.HTTPError
-// @Failure     404 {object} httputil.HTTPError
-// @Failure     500 {object} httputil.HTTPError
+// @Failure     400 {object} response.Error
+// @Failure     404 {object} response.Error
+// @Failure     500 {object} response.Error
 // @Router      /accounts/login [post]
 func (a accounts) Login() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -72,9 +72,9 @@ func (a accounts) Login() gin.HandlerFunc {
 // @Accept      json
 // @Produce     json
 // @Success     200 {object} response.Account
-// @Failure     400 {object} httputil.HTTPError
-// @Failure     404 {object} httputil.HTTPError
-// @Failure     500 {object} httputil.HTTPError
+// @Failure     400 {object} response.Error
+// @Failure     404 {object} response.Error
+// @Failure     500 {object} response.Error
 // @Router      /accounts [post]
 func (a accounts) CreateAccount() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -109,9 +109,9 @@ func (a accounts) CreateAccount() gin.HandlerFunc {
 // @Accept      json
 // @Produce     json
 // @Success     200 {object} response.Account
-// @Failure     400 {object} httputil.HTTPError
-// @Failure     404 {object} httputil.HTTPError
-// @Failure     500 {object} httputil.HTTPError
+// @Failure     400 {object} response.Error
+// @Failure     404 {object} response.Error
+// @Failure     500 {object} response.Error
 // @Router      /accounts/{id} [put]
 // @Security    AuthorizationBearer
 func (a accounts) UpdateAccount() gin.HandlerFunc {
@@ -143,8 +143,8 @@ func (a accounts) UpdateAccount() gin.HandlerFunc {
 // @Accept      json
 // @Produce     json
 // @Success     204 {object} nil
-// @Failure     404 {object} httputil.HTTPError
-// @Failure     500 {object} httputil.HTTPError
+// @Failure     404 {object} response.Error
+// @Failure     500 {object} response.Error
 // @Security    AuthorizationBearer
 func (a accounts) DeleteAccount() gin.HandlerFunc {
 	return func(c *gin.Context) {
