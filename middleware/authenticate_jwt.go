@@ -70,16 +70,14 @@ func (m *AuthenticateJwtMiddleware) Run() gin.HandlerFunc {
 			return
 		}
 
-		p := payload.Account{}
+		p := payload.AccountWithID{}
 		err := json.Unmarshal([]byte(a.(string)), &p)
 		if err != nil {
 			respondWithError(c, defaultStatusCode, invalidJWTError)
 			return
 		}
 
-		log.Printf("p: %v", p)
-		account := payload.AccountToDTO(&p)
-		log.Printf("account: %v", account)
+		account := payload.AccountWithIDToDTO(&p)
 
 		c.Set("account", account)
 	}
