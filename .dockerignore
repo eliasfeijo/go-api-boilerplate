@@ -1,0 +1,6 @@
+# Binary
+api
+
+# Environment
+.env
+.env.example
