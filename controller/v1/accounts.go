@@ -71,10 +71,11 @@ func (a accounts) Login() gin.HandlerFunc {
 // @Tags        accounts
 // @Accept      json
 // @Produce     json
-// @Success     200 {object} response.Account
-// @Failure     400 {object} response.Error
-// @Failure     404 {object} response.Error
-// @Failure     500 {object} response.Error
+// @Param       Account body     payload.Account true "Account body"
+// @Success     200     {object} response.Account
+// @Failure     400     {object} response.Error
+// @Failure     404     {object} response.Error
+// @Failure     500     {object} response.Error
 // @Router      /accounts [post]
 func (a accounts) CreateAccount() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -108,10 +109,12 @@ func (a accounts) CreateAccount() gin.HandlerFunc {
 // @Tags        accounts
 // @Accept      json
 // @Produce     json
-// @Success     200 {object} response.Account
-// @Failure     400 {object} response.Error
-// @Failure     404 {object} response.Error
-// @Failure     500 {object} response.Error
+// @Param       id      path     string          true "Account ID"
+// @Param       Account body     payload.Account true "Account body"
+// @Success     200     {object} response.Account
+// @Failure     400     {object} response.Error
+// @Failure     404     {object} response.Error
+// @Failure     500     {object} response.Error
 // @Router      /accounts/{id} [put]
 // @Security    AuthorizationBearer
 func (a accounts) UpdateAccount() gin.HandlerFunc {
@@ -138,13 +141,15 @@ func (a accounts) UpdateAccount() gin.HandlerFunc {
 
 // Delete godoc
 // @Summary     Deletes an account and user
-// @Description returns the updated account information
+// @Description returns 204 on success
 // @Tags        accounts
 // @Accept      json
 // @Produce     json
+// @Param       id  path     string true "Account ID"
 // @Success     204 {object} nil
 // @Failure     404 {object} response.Error
 // @Failure     500 {object} response.Error
+// @Router      /accounts/{id} [delete]
 // @Security    AuthorizationBearer
 func (a accounts) DeleteAccount() gin.HandlerFunc {
 	return func(c *gin.Context) {
